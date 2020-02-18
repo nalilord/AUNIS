@@ -14,6 +14,7 @@ import mrjake.aunis.tileentity.CrystalInfuserTile;
 import mrjake.aunis.tileentity.DHDTile;
 import mrjake.aunis.tileentity.TRControllerTile;
 import mrjake.aunis.tileentity.TransportRingsTile;
+import mrjake.aunis.tileentity.NaquadahGeneratorTile;
 import mrjake.aunis.tileentity.stargate.StargateMilkyWayBaseTile;
 import mrjake.aunis.tileentity.stargate.StargateMilkyWayMemberTile;
 import mrjake.aunis.tileentity.stargate.StargateOrlinBaseTile;
@@ -43,6 +44,7 @@ public class AunisBlocks {
 	
 	public static DHDBlock dhdBlock = new DHDBlock();
 	public static CrystalInfuserBlock crystalInfuserBlock = new CrystalInfuserBlock();
+	public static NaquadahGeneratorBlock naquadahGeneratorBlock = new NaquadahGeneratorBlock();	
 	
 	public static TransportRingsBlock transportRingsBlock = new TransportRingsBlock();
 	public static TRControllerBlock trControllerBlock = new TRControllerBlock();
@@ -62,6 +64,7 @@ public class AunisBlocks {
 		
 		dhdBlock,
 		crystalInfuserBlock,
+		naquadahGeneratorBlock,
 		
 		transportRingsBlock,
 		trControllerBlock,
@@ -81,6 +84,7 @@ public class AunisBlocks {
 		GameRegistry.registerTileEntity(StargateMilkyWayMemberTile.class, AunisBlocks.stargateMilkyWayMemberBlock.getRegistryName());
 		GameRegistry.registerTileEntity(DHDTile.class, AunisBlocks.dhdBlock.getRegistryName());
 		GameRegistry.registerTileEntity(CrystalInfuserTile.class, AunisBlocks.crystalInfuserBlock.getRegistryName());
+		GameRegistry.registerTileEntity(NaquadahGeneratorTile.class, AunisBlocks.naquadahGeneratorBlock.getRegistryName());
 		GameRegistry.registerTileEntity(TransportRingsTile.class, AunisBlocks.transportRingsBlock.getRegistryName());
 		GameRegistry.registerTileEntity(TRControllerTile.class, AunisBlocks.trControllerBlock.getRegistryName());
 	}

@@ -57,6 +57,16 @@ public class EnergyStorageSerializable extends EnergyStorage implements INBTSeri
 		
 		onEnergyChanged();
 	}
-	
+
+	public void modifyEnergyStored(int energy) {
+		this.energy += energy;
+
+		if (this.energy > capacity) {
+			this.energy = capacity;
+		} else if (this.energy < 0) {
+			this.energy = 0;
+		}
+	}
+
 	protected void onEnergyChanged() {}
 }

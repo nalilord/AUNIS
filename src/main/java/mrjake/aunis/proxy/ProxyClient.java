@@ -12,10 +12,8 @@ import mrjake.aunis.item.color.PageMysteriousItemColor;
 import mrjake.aunis.item.color.PageNotebookItemColor;
 import mrjake.aunis.item.renderer.PageNotebookTEISR;
 import mrjake.aunis.renderer.SpecialRenderer;
-import mrjake.aunis.tileentity.CrystalInfuserTile;
-import mrjake.aunis.tileentity.DHDTile;
-import mrjake.aunis.tileentity.TRControllerTile;
-import mrjake.aunis.tileentity.TransportRingsTile;
+import mrjake.aunis.renderer.generator.NaquadahGeneratorRenderer;
+import mrjake.aunis.tileentity.*;
 import mrjake.aunis.tileentity.stargate.StargateMilkyWayBaseTile;
 import mrjake.aunis.tileentity.stargate.StargateOrlinBaseTile;
 import net.minecraft.client.Minecraft;
@@ -66,6 +64,7 @@ public class ProxyClient implements IProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(CrystalInfuserTile.class, specialRenderer);
 		ClientRegistry.bindTileEntitySpecialRenderer(TransportRingsTile.class, specialRenderer);
 		ClientRegistry.bindTileEntitySpecialRenderer(TRControllerTile.class, specialRenderer);
+		ClientRegistry.bindTileEntitySpecialRenderer(NaquadahGeneratorTile.class, specialRenderer);
 	}
 	
 
