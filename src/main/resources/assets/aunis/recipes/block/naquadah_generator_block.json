@@ -1,0 +1,33 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"NCN",
+		"BIB",
+		"BBB"
+	],
+	
+	"key": {
+		"C": {
+			"item": "aunis:circuit_control_crystal"
+		},
+
+		"I": {
+			"item": "aunis:circuit_control_naquadah"
+		},
+
+		"B": {
+			"item": "aunis:naquadah_block"
+		},
+
+		"N": {
+			"item": "aunis:naquadah_alloy"
+		}
+		
+	},
+	
+	"result": {
+		"item": "aunis:naquadah_generator_block",
+		"count": 1,
+		"data": 0
+	}
+}

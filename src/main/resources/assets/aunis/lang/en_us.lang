@@ -18,6 +18,7 @@ tile.aunis.stargate_milkyway_base_block.name=Stargate Base (Milky Way)
 tile.aunis.stargate_milkyway_ring_block.name=Stargate Ring (Milky Way)
 tile.aunis.stargate_milkyway_chevron_block.name=Stargate Chevron (Milky Way)
 tile.aunis.dhd_block.name=Dial Home Device (DHD)
+tile.aunis.naquadah_generator_block.name=Naquadah Generator
 
 tile.aunis.stargate_orlin_base_block.name=Stargate Base (Orlin)
 tile.aunis.stargate_orlin_member_block.name=Stargate Ring (Orlin)

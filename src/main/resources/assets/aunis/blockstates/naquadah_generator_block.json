@@ -1,19 +1,31 @@
 {
 	"forge_marker": 1,
 	"defaults": {
-		"model": "aunis:naquadah_generator_block"
+		"transform": "forge:default-block",
+		"custom": { "flip-v": true },
+		"model": "aunis:naquadah_generator.obj"
 	},
 	"variants": {
-		"normal": [{}],
-		"inventory": [{
-		}],
-		"facing": {
-			"south": { "y": 180 },
-			"west": { "y": 270 },
-			"north": {},
-			"east": { "y": 90 },
-			"up": {},
-			"down": {}
+		"facing=north": {
+			"scale": 1.0
+		},
+		"facing=south": {
+			"scale": 1.0
+		},
+		"facing=west": {
+			"scale": 1.0
+		},
+		"facing=east": {
+			"scale": 1.0
+		},
+		"facing=up": {
+			"scale": 1.0
+		},
+		"facing=down": {
+			"scale": 1.0
+		},
+		"inventory": {
+			"transform": "forge:default-item"
 		}
 	}
 }
