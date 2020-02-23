@@ -153,14 +153,14 @@ public class NaquadahGeneratorTile extends TileEntity implements ITickable, IEne
         return interacted;
     }
 
-    public int getTileMeta() {
-        return energyStorage.getEnergyStored();
-    }
-
     @Override
     public NBTTagCompound getTileData() {
         NBTTagCompound compound =  super.getTileData();
+        compound = getTileData(compound);
+        return compound;
+    }
 
+    private NBTTagCompound getTileData(NBTTagCompound compound) {
         compound.setTag("rendererState", rendererState.serializeNBT());
         compound.setTag("energy", energyStorage.serializeNBT());
         compound.setTag("fluid", fluidStorage.serializeNBT());
@@ -170,23 +170,10 @@ public class NaquadahGeneratorTile extends TileEntity implements ITickable, IEne
         return compound;
     }
 
-    // ------------------------------------------------------------------------
-
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound.setTag("rendererState", rendererState.serializeNBT());
-        compound.setTag("energy", energyStorage.serializeNBT());
-        compound.setTag("fluid", fluidStorage.serializeNBT());
-        compound.setBoolean("isActive", isActive);
-        compound.setInteger("powerBuffer", powerBuffer);
-
-        return super.writeToNBT(compound);
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound compound) {
+    public void setTileData(NBTTagCompound compound) {
         try {
-            rendererState.deserializeNBT(compound.getCompoundTag("rendererState"));
+            if (compound.hasKey("rendererState"))
+                rendererState.deserializeNBT(compound.getCompoundTag("rendererState"));
         } catch (NullPointerException | IndexOutOfBoundsException | ClassCastException e) {
             Aunis.info("Exception at reading RendererState");
             Aunis.info("If loading world used with previous version and nothing game-breaking doesn't happen, please ignore it");
@@ -202,7 +189,19 @@ public class NaquadahGeneratorTile extends TileEntity implements ITickable, IEne
             isActive = compound.getBoolean("isActive");
         if (compound.hasKey("powerBuffer"))
             powerBuffer = compound.getInteger("powerBuffer");
+    }
 
+    // ------------------------------------------------------------------------
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        compound = getTileData(compound);
+        return super.writeToNBT(compound);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound compound) {
+        setTileData(compound);
         super.readFromNBT(compound);
     }
 

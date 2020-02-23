@@ -4,7 +4,6 @@ import mrjake.aunis.Aunis;
 import mrjake.aunis.AunisProps;
 import mrjake.aunis.tileentity.NaquadahGeneratorTile;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFlowerPot;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -12,11 +11,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFlowerPot;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -29,13 +26,13 @@ import javax.annotation.Nullable;
 
 public class NaquadahGeneratorBlock extends Block {
 
-    private static final String blockName = "naquadah_generator_block";
+    public static final String BLOCK_NAME = "naquadah_generator_block";
 
     public NaquadahGeneratorBlock() {
         super(Material.ROCK);
 
-        setRegistryName(Aunis.ModID + ":" + blockName);
-        setTranslationKey(Aunis.ModID + "." + blockName);
+        setRegistryName(Aunis.ModID + ":" + BLOCK_NAME);
+        setTranslationKey(Aunis.ModID + "." + BLOCK_NAME);
 
         setSoundType(SoundType.STONE);
         setCreativeTab(Aunis.aunisCreativeTab);
@@ -91,18 +88,23 @@ public class NaquadahGeneratorBlock extends Block {
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        worldIn.setBlockState(pos, state.withProperty(AunisProps.FACING_HORIZONTAL, placer.getHorizontalFacing().getOpposite()), 2); // 2 - send update to clients
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        world.setBlockState(pos, state.withProperty(AunisProps.FACING_HORIZONTAL, placer.getHorizontalFacing().getOpposite()), 2);
+        if (stack.hasTagCompound() && stack.getTagCompound().hasKey("generator")) {
+            NBTTagCompound tag = stack.getTagCompound().getCompoundTag("generator");
+            NaquadahGeneratorTile tile = world.getTileEntity(pos) instanceof NaquadahGeneratorTile ? (NaquadahGeneratorTile) world.getTileEntity(pos) : null;
+            if(tile != null)
+                tile.setTileData(tag);
+        }
     }
 
     @Override
-    public void getDrops(net.minecraft.util.NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-    {
+    public void getDrops(net.minecraft.util.NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         NaquadahGeneratorTile tile = world.getTileEntity(pos) instanceof NaquadahGeneratorTile ? (NaquadahGeneratorTile) world.getTileEntity(pos) : null;
         if (tile != null) {
             ItemStack stack = new ItemStack(this);
             NBTTagCompound tagCompound = new NBTTagCompound();
-            tagCompound.setTag("BlockEntityTag", tile.getTileData());
+            tagCompound.setTag("generator", tile.getTileData());
             stack.setTagCompound(tagCompound);
             drops.add(stack);
         }

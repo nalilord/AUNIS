@@ -8,6 +8,7 @@ import mrjake.aunis.block.stargate.StargateMilkyWayBaseBlock;
 import mrjake.aunis.block.stargate.StargateMilkyWayMemberBlock;
 import mrjake.aunis.block.stargate.StargateOrlinBaseBlock;
 import mrjake.aunis.block.stargate.StargateOrlinMemberBlock;
+import mrjake.aunis.item.NaquadahGeneratorBlockItem;
 import mrjake.aunis.item.StargateMilkyWayMemberItemBlock;
 import mrjake.aunis.stargate.EnumMemberVariant;
 import mrjake.aunis.tileentity.CrystalInfuserTile;
@@ -64,8 +65,7 @@ public class AunisBlocks {
 		
 		dhdBlock,
 		crystalInfuserBlock,
-		naquadahGeneratorBlock,
-		
+
 		transportRingsBlock,
 		trControllerBlock,
 		invisibleBlock
@@ -77,6 +77,7 @@ public class AunisBlocks {
 		
 		registry.registerAll(blocks);
 		registry.register(stargateMilkyWayMemberBlock);
+		registry.register(naquadahGeneratorBlock);
 		
 		GameRegistry.registerTileEntity(StargateMilkyWayBaseTile.class, AunisBlocks.stargateMilkyWayBaseBlock.getRegistryName());
 		GameRegistry.registerTileEntity(StargateOrlinBaseTile.class, AunisBlocks.stargateOrlinBaseBlock.getRegistryName());
@@ -96,7 +97,8 @@ public class AunisBlocks {
 		for (Block block : blocks)
 			registry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
 		
-		registry.register(new StargateMilkyWayMemberItemBlock(stargateMilkyWayMemberBlock));		
+		registry.register(new StargateMilkyWayMemberItemBlock(stargateMilkyWayMemberBlock));
+		registry.register(new NaquadahGeneratorBlockItem(naquadahGeneratorBlock));
 	}
 	
 	@SubscribeEvent
@@ -107,9 +109,10 @@ public class AunisBlocks {
 		
 		int ringMeta = stargateMilkyWayMemberBlock.getMetaFromState(stargateMilkyWayMemberBlock.getDefaultState().withProperty(AunisProps.MEMBER_VARIANT, EnumMemberVariant.RING));
 		int chevronMeta = stargateMilkyWayMemberBlock.getMetaFromState(stargateMilkyWayMemberBlock.getDefaultState().withProperty(AunisProps.MEMBER_VARIANT, EnumMemberVariant.CHEVRON));
-		
+
 		ModelLoader.setCustomModelResourceLocation(ItemBlock.getItemFromBlock(stargateMilkyWayMemberBlock), ringMeta, new ModelResourceLocation("aunis:stargate_milkyway_ring_block"));
 		ModelLoader.setCustomModelResourceLocation(ItemBlock.getItemFromBlock(stargateMilkyWayMemberBlock), chevronMeta, new ModelResourceLocation("aunis:stargate_milkyway_chevron_block"));
+		ModelLoader.setCustomModelResourceLocation(ItemBlock.getItemFromBlock(naquadahGeneratorBlock), 0, new ModelResourceLocation(naquadahGeneratorBlock.getRegistryName(), "inventory"));
 	}
 	
 	@Nullable
